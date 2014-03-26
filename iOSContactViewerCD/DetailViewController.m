@@ -148,7 +148,7 @@
     
     // pass all fields back to contactDetail item
     self.contactDetail.name = self.nameTextField.text;
-    self.contactDetail.title = @"Doctor"; //self.titleTextField.text;
+    self.contactDetail.title = self.titleTextField.text;
     self.contactDetail.phone = self.phoneTextField.text;
     self.contactDetail.email = self.emailTextField.text;
     self.contactDetail.twitterId = self.twitterIdTextField.text;
