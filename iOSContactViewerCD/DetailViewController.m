@@ -127,6 +127,16 @@
 - (void)finishEditing
 {
     
+    
+    //name cannot be blank validation
+    if(self.nameTextField.text == NULL || self.nameTextField.text.length==0){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Name Cannot Be Blank"
+                                                       delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [alert show];
+        
+    }
+    else {
     // stop editing - save values
     self.isEditMode = NO;
     
@@ -159,6 +169,7 @@
     
     // selector called when user is done editing
     [self.delegate detailViewDidSave:nil];
+}
 }
 
 @end

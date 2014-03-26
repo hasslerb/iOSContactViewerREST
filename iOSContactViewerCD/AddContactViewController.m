@@ -46,6 +46,17 @@
 }
 
 - (IBAction)saveButton:(id)sender {
+    //name cannot be blank validation
+    if(self.nameTextField.text == NULL || self.nameTextField.text.length==0){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Name Cannot Be Blank"
+                                                       delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        [alert show];
+    
+    }
+    else
+    {
+        
     
     self.contactDetail.name = self.nameTextField.text;
     self.contactDetail.title = @"Doctor"; //self.titleTextField.text;
@@ -54,6 +65,7 @@
     self.contactDetail.twitterId = self.twitterIdTextField.text;
     
     [self.delegate addContactViewControllerSave];
+}
 }
 
 - (IBAction)cancelButton:(id)sender {
