@@ -11,7 +11,8 @@
 
 @interface DetailViewController ()
 
-@property (strong, nonatomic) IBOutlet UITextField *titleTextField;
+@property (strong, nonatomic) IBOutlet UIPickerView *titlePickerField;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabelField;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
@@ -20,18 +21,50 @@
 @property (strong, nonatomic) IBOutlet UIButton *callButton;
 @property (strong, nonatomic) IBOutlet UIButton *smsButton;
 @property (strong, nonatomic) IBOutlet UIButton *emailButton;
+@property (strong, nonatomic) IBOutlet UIButton *doneButton;
+@property (strong, nonatomic) IBOutlet UIImageView *dropdownImage;
+
+@property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
 @property BOOL isEditMode;
+@property (nonatomic, strong) NSArray *titles;
+
 
 - (void)configureView;
 - (void)displayContactActionControls:(BOOL)show;
 - (void)editContact;
+- (void)titleOnFocus;
+- (IBAction)textFieldDidEndEditing:(id)sender;
+- (IBAction)titleOutOfFocus;
+
 - (IBAction)call:(id)sender;
 - (IBAction)launchSMS:(id)sender;
 - (IBAction)launchEmail:(id)sender;
 @end
 
 @implementation DetailViewController
+
+#pragma mark - Implementing methods
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_titles count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [_titles objectAtIndex:row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+    self.titleLabelField.text =[_titles objectAtIndex:row];
+}
 
 #pragma mark - Managing the detail item
 
@@ -41,7 +74,7 @@
     // Update the user interface for the detail item.
 
     if (self.contactDetail) {
-        self.titleTextField.text = [[self.contactDetail valueForKey:@"title"] description];
+        self.titleLabelField.text = [[self.contactDetail valueForKey:@"title"] description];
         self.nameTextField.text = [[self.contactDetail valueForKey:@"name"] description];
         self.phoneTextField.text = [[self.contactDetail valueForKey:@"phone"] description];
         self.emailTextField.text = [[self.contactDetail valueForKey:@"email"] description];
@@ -56,6 +89,11 @@
     [self configureView];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.editButtonItem.action = @selector(editContact);
+    
+    _titles = [[NSArray alloc] initWithObjects:@"Mr",@"Mrs",@"Ms",@"Miss",@"Dr",@"Captain",@"Master", nil];
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleOnFocus)];
+    [self.titleLabelField addGestureRecognizer:self.tapGestureRecognizer];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,8 +138,7 @@
         
         // change title and enable text fields
         self.navigationItem.title = @"Edit Contact";
-        self.titleTextField.enabled = YES;
-        self.titleTextField.borderStyle = UITextBorderStyleRoundedRect;
+        
         self.nameTextField.enabled = YES;
         self.nameTextField.borderStyle = UITextBorderStyleRoundedRect;
         self.phoneTextField.enabled = YES;
@@ -116,6 +153,8 @@
         myButton.action = @selector(finishEditing);
         myButton.title = @"Done";
         myButton.target = self;
+        
+        self.dropdownImage.hidden = NO;
         
         // then we add the button to the navigation bar
         self.navigationItem.rightBarButtonItem = myButton;
@@ -145,8 +184,6 @@
     
     // change title and enable text fields
     self.navigationItem.title = @"Contact";
-    self.titleTextField.enabled = NO;
-    self.titleTextField.borderStyle = UITextBorderStyleNone;
     self.nameTextField.enabled = NO;
     self.nameTextField.borderStyle = UITextBorderStyleNone;
     self.phoneTextField.enabled = NO;
@@ -158,7 +195,7 @@
     
     // pass all fields back to contactDetail item
     self.contactDetail.name = self.nameTextField.text;
-    self.contactDetail.title = @"Doctor"; //self.titleTextField.text;
+    self.contactDetail.title = self.titleLabelField.text;
     self.contactDetail.phone = self.phoneTextField.text;
     self.contactDetail.email = self.emailTextField.text;
     self.contactDetail.twitterId = self.twitterIdTextField.text;
@@ -166,10 +203,38 @@
     // change right top button
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
+    self.dropdownImage.hidden = YES;
+        
+    [self titleOnFocus];
     // selector called when user is done editing
     [self.delegate detailViewDidSave:nil];
 }
+}
+
+- (IBAction)textFieldDidEndEditing:(id)sender {
+    [sender resignFirstResponder];
+}
+
+
+- (void)titleOnFocus {
+    
+        if (self.titlePickerField.hidden && self.isEditMode)
+            self.titlePickerField.hidden=NO;
+        else
+            
+            self.titlePickerField.hidden=YES;
+        
+        self.doneButton.hidden = self.titlePickerField.hidden;
+        [self.view endEditing:YES];
+}
+
+- (IBAction)titleOutOfFocus {
+    
+    if(self.titlePickerField.hidden==NO)
+    {
+        self.titlePickerField.hidden=YES;
+        self.doneButton.hidden = self.titlePickerField.hidden;
+    }
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "Contact.h"
 
 @protocol DetailViewDelegate;
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) Contact *contactDetail;
 @property (weak, nonatomic) id <DetailViewDelegate> delegate;

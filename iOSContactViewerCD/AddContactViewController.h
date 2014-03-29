@@ -10,7 +10,7 @@
 #import "Contact.h"
 
 @protocol AddContactViewControllerDelegate;
-@interface AddContactViewController : UIViewController
+@interface AddContactViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) Contact *contactDetail;

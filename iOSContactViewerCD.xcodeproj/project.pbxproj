@@ -36,6 +36,10 @@
 		E31562D718E203020036318E /* sendemail.png in Resources */ = {isa = PBXBuildFile; fileRef = E31562CE18E203020036318E /* sendemail.png */; };
 		E31562D818E203020036318E /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = E31562CF18E203020036318E /* sms.png */; };
 		E31562D918E203020036318E /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = E31562D018E203020036318E /* twitter.png */; };
+		E3675B6D18E4C50A00623076 /* splash1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3675B6C18E4C50A00623076 /* splash1.png */; };
+		E3675B6F18E4C54800623076 /* splash2.png in Resources */ = {isa = PBXBuildFile; fileRef = E3675B6E18E4C54800623076 /* splash2.png */; };
+		E3675B7118E4C6ED00623076 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3675B7018E4C6ED00623076 /* app_icon.png */; };
+		E37AFFFF18E47B2000D9909C /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = E37AFFFE18E47B2000D9909C /* dropdown.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +89,10 @@
 		E31562CE18E203020036318E /* sendemail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sendemail.png; sourceTree = "<group>"; };
 		E31562CF18E203020036318E /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
 		E31562D018E203020036318E /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		E3675B6C18E4C50A00623076 /* splash1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash1.png; sourceTree = "<group>"; };
+		E3675B6E18E4C54800623076 /* splash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash2.png; sourceTree = "<group>"; };
+		E3675B7018E4C6ED00623076 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon.png; sourceTree = "<group>"; };
+		E37AFFFE18E47B2000D9909C /* dropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdown.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +206,10 @@
 		E31562C718E203020036318E /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				E3675B7018E4C6ED00623076 /* app_icon.png */,
+				E3675B6E18E4C54800623076 /* splash2.png */,
+				E3675B6C18E4C50A00623076 /* splash1.png */,
+				E37AFFFE18E47B2000D9909C /* dropdown.png */,
 				E31562C818E203020036318E /* call.png */,
 				E31562C918E203020036318E /* contact.png */,
 				E31562CA18E203020036318E /* contactsapp.png */,
@@ -258,6 +270,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Diorelle Ramos";
 				TargetAttributes = {
+					E315627F18E1F7FA0036318E = {
+						DevelopmentTeam = F5GCE5646X;
+					};
 					E31562A818E1F7FA0036318E = {
 						TestTargetID = E315627F18E1F7FA0036318E;
 					};
@@ -289,10 +304,14 @@
 			files = (
 				E31562A418E1F7FA0036318E /* Images.xcassets in Resources */,
 				E31562D218E203020036318E /* contact.png in Resources */,
+				E3675B6F18E4C54800623076 /* splash2.png in Resources */,
 				E31562D818E203020036318E /* sms.png in Resources */,
+				E3675B6D18E4C50A00623076 /* splash1.png in Resources */,
 				E315629018E1F7FA0036318E /* InfoPlist.strings in Resources */,
 				E315629918E1F7FA0036318E /* Main.storyboard in Resources */,
 				E31562D518E203020036318E /* email.png in Resources */,
+				E37AFFFF18E47B2000D9909C /* dropdown.png in Resources */,
+				E3675B7118E4C6ED00623076 /* app_icon.png in Resources */,
 				E31562D618E203020036318E /* phone.png in Resources */,
 				E31562D418E203020036318E /* delete.png in Resources */,
 				E31562D318E203020036318E /* contactsapp.png in Resources */,
@@ -446,12 +465,13 @@
 		E31562BC18E1F7FA0036318E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSContactViewerCD/iOSContactViewerCD-Prefix.pch";
 				INFOPLIST_FILE = "iOSContactViewerCD/iOSContactViewerCD-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -459,12 +479,13 @@
 		E31562BD18E1F7FA0036318E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSContactViewerCD/iOSContactViewerCD-Prefix.pch";
 				INFOPLIST_FILE = "iOSContactViewerCD/iOSContactViewerCD-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -528,6 +549,7 @@
 				E31562BD18E1F7FA0036318E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E31562BE18E1F7FA0036318E /* Build configuration list for PBXNativeTarget "iOSContactViewerCDTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +558,7 @@
 				E31562C018E1F7FA0036318E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
