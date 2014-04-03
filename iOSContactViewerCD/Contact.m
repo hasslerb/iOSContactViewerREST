@@ -11,6 +11,6 @@
 
 @implementation Contact
 
-@synthesize  name, title, phone, email, twitterId;
+@synthesize  contactId, name, title, phone, email, twitterId;
 
 @end

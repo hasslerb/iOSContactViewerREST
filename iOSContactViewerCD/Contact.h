@@ -12,6 +12,7 @@
 
 @interface Contact : NSObject
 
+@property (nonatomic, retain) NSString * contactId;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * phone;

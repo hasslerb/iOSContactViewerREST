@@ -22,8 +22,8 @@
 @protocol AddContactViewControllerDelegate
 
 // delegate methods
-- (void)addContactViewControllerCancel:(Contact *)contact;
-- (void)addContactViewControllerSave;
+- (void)addContactViewControllerCancel;
+- (void)addContactViewControllerSave:(Contact *)contact;
 
 @end
 

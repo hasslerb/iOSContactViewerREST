@@ -3,13 +3,16 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[AppDelegate managedObjectModel]:AppDelegate.m">
-      </ContextState>
-      <ContextState
          contextName = "-[AppDelegate persistentStoreCoordinator]:AppDelegate.m">
       </ContextState>
       <ContextState
+         contextName = "-[AppDelegate managedObjectModel]:AppDelegate.m">
+      </ContextState>
+      <ContextState
          contextName = "-[AppDelegate applicationDocumentsDirectory]:AppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[RESTHelper getContacts]:RESTHelper.m">
       </ContextState>
       <ContextState
          contextName = "-[AddContactViewController cancelButton:]:AddContactViewController.m">
@@ -18,9 +21,12 @@
          contextName = "-[AddContactViewController saveButton:]:AddContactViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "">
+               value = "self.contactDetail.contactId">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RESTHelper getResponse:withMethod:]:RESTHelper.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
