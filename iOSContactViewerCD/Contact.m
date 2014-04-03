@@ -11,10 +11,6 @@
 
 @implementation Contact
 
-@dynamic name;
-@dynamic title;
-@dynamic phone;
-@dynamic email;
-@dynamic twitterId;
+@synthesize  name, title, phone, email, twitterId;
 
 @end

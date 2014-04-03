@@ -36,6 +36,7 @@
 		E31562D718E203020036318E /* sendemail.png in Resources */ = {isa = PBXBuildFile; fileRef = E31562CE18E203020036318E /* sendemail.png */; };
 		E31562D818E203020036318E /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = E31562CF18E203020036318E /* sms.png */; };
 		E31562D918E203020036318E /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = E31562D018E203020036318E /* twitter.png */; };
+		E325E24A18EDA5EA0092E1BE /* RESTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E325E24918EDA5EA0092E1BE /* RESTHelper.m */; };
 		E3675B6D18E4C50A00623076 /* splash1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3675B6C18E4C50A00623076 /* splash1.png */; };
 		E3675B6F18E4C54800623076 /* splash2.png in Resources */ = {isa = PBXBuildFile; fileRef = E3675B6E18E4C54800623076 /* splash2.png */; };
 		E3675B7118E4C6ED00623076 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3675B7018E4C6ED00623076 /* app_icon.png */; };
@@ -89,6 +90,8 @@
 		E31562CE18E203020036318E /* sendemail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sendemail.png; sourceTree = "<group>"; };
 		E31562CF18E203020036318E /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
 		E31562D018E203020036318E /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		E325E24818EDA5EA0092E1BE /* RESTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESTHelper.h; sourceTree = "<group>"; };
+		E325E24918EDA5EA0092E1BE /* RESTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESTHelper.m; sourceTree = "<group>"; };
 		E3675B6C18E4C50A00623076 /* splash1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash1.png; sourceTree = "<group>"; };
 		E3675B6E18E4C54800623076 /* splash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash2.png; sourceTree = "<group>"; };
 		E3675B7018E4C6ED00623076 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon.png; sourceTree = "<group>"; };
@@ -155,6 +158,8 @@
 		E315628B18E1F7FA0036318E /* iOSContactViewerCD */ = {
 			isa = PBXGroup;
 			children = (
+				E325E24818EDA5EA0092E1BE /* RESTHelper.h */,
+				E325E24918EDA5EA0092E1BE /* RESTHelper.m */,
 				E31562C718E203020036318E /* Graphics */,
 				E315629418E1F7FA0036318E /* AppDelegate.h */,
 				E315629518E1F7FA0036318E /* AppDelegate.m */,
@@ -341,6 +346,7 @@
 				E315629F18E1F7FA0036318E /* MasterViewController.m in Sources */,
 				E315629618E1F7FA0036318E /* AppDelegate.m in Sources */,
 				E315629218E1F7FA0036318E /* main.m in Sources */,
+				E325E24A18EDA5EA0092E1BE /* RESTHelper.m in Sources */,
 				E31562C318E1FB280036318E /* Contact.m in Sources */,
 				E315629C18E1F7FA0036318E /* iOSContactViewerCD.xcdatamodeld in Sources */,
 			);

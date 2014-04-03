@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 
 
-@interface Contact : NSManagedObject
+@interface Contact : NSObject
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * title;

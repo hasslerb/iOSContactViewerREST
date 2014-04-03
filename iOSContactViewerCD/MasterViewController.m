@@ -8,12 +8,18 @@
 
 #import "MasterViewController.h"
 #import "Contact.h"
+#import "RESTHelper.h"
 
-@interface MasterViewController ()
+@interface MasterViewController (){
+    NSMutableArray *_contacts;
+    RESTHelper *_restHelper;
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation MasterViewController
+
 
 - (void)awakeFromNib
 {
@@ -25,14 +31,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
+    
+    //init _helper
+    _restHelper = [[RESTHelper alloc]init];
+    
+    //init _contacts;
+    _contacts = [_restHelper getContacts];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    [self.managedObjectContext save:nil];
+    //[self.managedObjectContext save:nil];
 }
 
 
@@ -40,13 +51,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
+    //return [[self.fetchedResultsController sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    return [_contacts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,16 +76,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
+       
     }   
 }
 
@@ -90,8 +92,7 @@
     if ([segue.identifier isEqualToString:@"showDetail"]) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Contact *contactDetail = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        
+        Contact *contactDetail = [_contacts objectAtIndex:indexPath.row];
         DetailViewController *detailView = [[DetailViewController alloc]init];
         detailView = segue.destinationViewController;
         detailView.contactDetail = contactDetail;
@@ -104,10 +105,10 @@
         controller.delegate = self;
         
         // create new Contact and pass it over
-        NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-        Contact *newContact = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:self.managedObjectContext];
-        
-        controller.contactDetail = newContact;
+//        NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+//        Contact *newContact = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:self.managedObjectContext];
+//        
+//        controller.contactDetail = newContact;
         
     }
 }
@@ -161,28 +162,28 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"name"] description];
+    Contact *contactObject = [_contacts objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[contactObject valueForKey:@"name"] description];
 }
 
 - (void)addContactViewControllerSave {
     
     // save context and dismiss
-    [self.managedObjectContext save:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.managedObjectContext save:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)addContactViewControllerCancel:(Contact *)contact {
     
     // delete contact and dismiss
-    [self.managedObjectContext deleteObject:contact];
-    [self.managedObjectContext save:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.managedObjectContext deleteObject:contact];
+//    [self.managedObjectContext save:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)detailViewDidSave:(Contact *)contact {
     
-    [self.managedObjectContext save:nil];
+//    [self.managedObjectContext save:nil];
     //[self.navigationController popViewControllerAnimated:YES];
 }
 
