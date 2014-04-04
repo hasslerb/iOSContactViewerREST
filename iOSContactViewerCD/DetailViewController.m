@@ -44,6 +44,8 @@
 
 @implementation DetailViewController
 
+NSString *contactId;
+
 #pragma mark - Implementing methods
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -74,6 +76,7 @@
     // Update the user interface for the detail item.
 
     if (self.contactDetail) {
+        contactId = [[self.contactDetail valueForKey:@"contactId"] description];
         self.titleLabelField.text = [[self.contactDetail valueForKey:@"title"] description];
         self.nameTextField.text = [[self.contactDetail valueForKey:@"name"] description];
         self.phoneTextField.text = [[self.contactDetail valueForKey:@"phone"] description];
@@ -194,6 +197,7 @@
     self.twitterIdTextField.borderStyle = UITextBorderStyleNone;
     
     // pass all fields back to contactDetail item
+    self.contactDetail.contactId = contactId;
     self.contactDetail.name = self.nameTextField.text;
     self.contactDetail.title = self.titleLabelField.text;
     self.contactDetail.phone = self.phoneTextField.text;
@@ -207,7 +211,7 @@
         
     [self titleOnFocus];
     // selector called when user is done editing
-    [self.delegate detailViewDidSave:nil];
+    [self.delegate detailViewDidSave:self.contactDetail];
 }
 }
 

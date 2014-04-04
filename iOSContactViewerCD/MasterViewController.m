@@ -16,6 +16,7 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)refreshTableView;
 @end
 
 @implementation MasterViewController
@@ -43,7 +44,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    //[self.managedObjectContext save:nil];
 }
 
 
@@ -76,7 +76,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-       
+        Contact *contact = [_contacts objectAtIndex:indexPath.row];
+        [_restHelper deleteContact:contact];
+        [self refreshTableView];
     }   
 }
 
@@ -104,59 +106,7 @@
         controller = segue.destinationViewController;
         controller.delegate = self;
         
-        // create new Contact and pass it over
-//        NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-//        Contact *newContact = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:self.managedObjectContext];
-//        
-//        controller.contactDetail = newContact;
-        
     }
-}
-
-#pragma mark - Fetched results controller
-
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-	     // Replace this implementation with code to handle the error appropriately.
-	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
-    return _fetchedResultsController;
-}    
-
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.fetchedResultsController performFetch:nil];
-    [self.tableView reloadData];
 }
 
 
@@ -166,25 +116,28 @@
     cell.textLabel.text = [[contactObject valueForKey:@"name"] description];
 }
 
-- (void)addContactViewControllerSave {
+- (void)addContactViewControllerSave:(Contact *)contact {
     
     // save context and dismiss
-//    [self.managedObjectContext save:nil];
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    [_restHelper addContact:contact];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self refreshTableView];
 }
 
-- (void)addContactViewControllerCancel:(Contact *)contact {
+- (void)addContactViewControllerCancel {
     
-    // delete contact and dismiss
-//    [self.managedObjectContext deleteObject:contact];
-//    [self.managedObjectContext save:nil];
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)detailViewDidSave:(Contact *)contact {
     
-//    [self.managedObjectContext save:nil];
-    //[self.navigationController popViewControllerAnimated:YES];
+    [_restHelper updateContact:contact];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self refreshTableView];
 }
 
+- (void)refreshTableView {
+    _contacts = [_restHelper getContacts];
+    [self.tableView reloadData];
+}
 @end

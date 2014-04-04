@@ -91,20 +91,21 @@
     else
     {
         
-    
+    //self.contactDetail.contactId = [[NSUUID UUID] UUIDString];
+    self.contactDetail = [[Contact alloc]init];
     self.contactDetail.name = self.nameTextField.text;
     self.contactDetail.title = self.titleLabelField.text;
     self.contactDetail.phone = self.phoneTextField.text;
     self.contactDetail.email = self.emailTextField.text;
     self.contactDetail.twitterId = self.twitterIdTextField.text;
     
-    [self.delegate addContactViewControllerSave];
+    [self.delegate addContactViewControllerSave:self.contactDetail];
 }
 }
 
 - (IBAction)cancelButton:(id)sender {
     
-    [self.delegate addContactViewControllerCancel:self.contactDetail];
+    [self.delegate addContactViewControllerCancel];
 }
 
 - (IBAction)textFieldDidEndEditing:(id)sender {
@@ -131,5 +132,6 @@
         self.doneButton.hidden = self.titlePickerField.hidden;
     }
 }
+
 
 @end

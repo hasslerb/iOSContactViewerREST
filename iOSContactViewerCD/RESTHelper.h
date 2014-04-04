@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Contact.h"
 
 @interface RESTHelper : NSObject
 
 -(NSMutableArray *)getContacts;
--(void)addContact;
--(void)updateContact;
--(void)deleteContact;
+-(void)addContact:(Contact *)contact;
+-(void)updateContact:(Contact *)contact;
+-(void)deleteContact:(Contact *)contact;
 
 @end
